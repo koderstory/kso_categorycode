@@ -16,6 +16,18 @@
             </field>
         </record>
 
+        <record id="product_category_form_list_product" model="ir.ui.view">
+            <field name="name">product.category.view.list.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_list_view"/>
+            <field name="arch" type="xml">
+                <list string="Product Categories">
+                    <field name="code" string="Product category code" />
+                </list>
+            </field>
+        </record>
+
+
 
     </data>
 </odoo>
