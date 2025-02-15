@@ -5,7 +5,19 @@ class CustomCategory(models.Model):
     _inherit = 'product.category'
 
     code = fields.Char("Category Code", help="Code for category")
+    display_name = fields.Char(compute='_compute_display_name')
 
+    @api.depends('code', 'name')
+    def _compute_display_name(self):
+        for record in self:
+            code = (record.code or "").strip()
+            if code:
+                record.display_name = f"[{code}] {record.name or ''}"
+            else:
+                record.display_name = record.name or ''
+
+            
+    
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
